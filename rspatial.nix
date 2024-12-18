@@ -5,9 +5,11 @@ let
   sys_deps = with pkgs;
     [
       arrow-cpp
+      curl
       git
       geos
       gdal
+      openssl
       pandoc
       proj
       quarto
