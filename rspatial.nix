@@ -28,8 +28,10 @@ let
       knitr
       lwgeom
       mirai
+      pak
       progressr
       remotes
+      renv
       rmarkdown
       rnaturalearth
       rnaturalearthhires
@@ -67,5 +69,6 @@ let
      packages = r_pkgs;
      LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
      LANG = "en_US.UTF-8";
+     RENV_CONFIG_PAK_ENABLED = "TRUE";
     };
 }
