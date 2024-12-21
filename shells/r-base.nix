@@ -13,8 +13,7 @@ let
 {
    r-base = pkgs.mkShell {
      name = "r-base dev shell";
-     buildInputs = sysdeps;
-     packages = packages;
+     buildInputs = [sysdeps packages];
      LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
      LANG = "en_US.UTF-8";
     };

@@ -34,11 +34,11 @@
                 openssl
                 proj
                 R
-                udunits
               ];
 
             packages = with pkgs.rPackages;
               [
+                codetools
                 devtools
                 gdalcubes
                 gdalraster
@@ -55,8 +55,7 @@
           in {
 
           default = pkgs.mkShell {
-            buildInputs = sysdeps;
-            packages = packages;
+            buildInputs = [sysdeps packages];
             LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             LANG = "en_US.UTF-8";
             };

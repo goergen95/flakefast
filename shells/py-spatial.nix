@@ -36,8 +36,7 @@ let
 {
    py-spatial = pkgs.mkShell {
      name = "py-spatial dev shell";
-     buildInputs = sysdeps;
-     packages = packages;
+     buildInputs = [sysdeps packages];
      LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
      LANG = "en_US.UTF-8";
     };

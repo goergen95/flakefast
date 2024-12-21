@@ -13,8 +13,7 @@ let
 {
    py-base = pkgs.mkShell {
      name = "py-base dev shell";
-     buildInputs = sysdeps;
-     packages = packages;
+     buildInputs = [sysdeps packages];
      LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
      LANG = "en_US.UTF-8";
     };
