@@ -1,5 +1,5 @@
 {
-  description = "A Nix flake template for a py-spatial dev environment";
+  description = "A Nix flake template for a r-spatial dev environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -25,7 +25,6 @@
          let
             sysdeps = with pkgs;
               [
-                coreutils
                 arrow-cpp
                 coreutils
                 curl
@@ -34,29 +33,29 @@
                 gdal
                 openssl
                 proj
-                python311
+                R
               ];
 
-            packages = with pkgs.python311Packages;
+            packages = with pkgs.rPackages;
               [
-                boto3
-                cartopy
-                dask
-                fiona
-                fsspec
-                gdal
-                geopandas
-                jupyter-core
-                numpy
-                pyproj
-                rasterio
-                xarray
-                zarr
+                codetools
+                devtools
+                gdalcubes
+                gdalraster
+                lwgeom
+                rnaturalearth
+                rstac
+                s2
+                sf
+                stars
+                terra
+                tmap
               ];
 
           in {
 
           default = pkgs.mkShell {
+            name = "r-spatial";
             buildInputs = [sysdeps packages];
             LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             LANG = "en_US.UTF-8";

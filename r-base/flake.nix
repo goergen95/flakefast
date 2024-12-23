@@ -1,5 +1,5 @@
 {
-  description = "A Nix flake template for a py-base dev environment";
+  description = "A Nix flake template for a r-base dev environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -26,14 +26,15 @@
             sysdeps = with pkgs;
               [
                 coreutils
-                python311
+                R
               ];
 
-            packages = with pkgs.python311Packages; [ ];
+            packages = with pkgs.rPackages; [ ];
 
           in {
 
           default = pkgs.mkShell {
+            name = "r-base";
             buildInputs = [sysdeps packages];
             LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             LANG = "en_US.UTF-8";
