@@ -32,6 +32,7 @@
                 geos
                 gdal
                 openssl
+                openssl.out
                 proj
                 R
               ];
@@ -59,6 +60,9 @@
             buildInputs = [sysdeps packages];
             LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             LANG = "en_US.UTF-8";
+            shellHook = ''
+              export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.openssl.out}/lib";
+            '';
             };
           });
   };
