@@ -59,6 +59,7 @@
           default = pkgs.mkShell {
             name = "py-spatial";
             buildInputs = [sysdeps packages];
+            inputsFrom = sysdeps;
             LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             LANG = "en_US.UTF-8";
             };

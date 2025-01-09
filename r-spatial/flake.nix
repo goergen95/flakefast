@@ -31,7 +31,6 @@
                 git
                 geos
                 gdal
-                openssl
                 openssl.out
                 proj
                 R
@@ -58,6 +57,7 @@
           default = pkgs.mkShell {
             name = "r-spatial";
             buildInputs = [sysdeps packages];
+            inputsFrom = sysdeps;
             LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             LANG = "en_US.UTF-8";
             shellHook = ''
