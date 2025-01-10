@@ -15,11 +15,13 @@
           py-base = (import ./py-base/flake.nix).outputs {inherit self; inherit nixpkgs;};
           r-spatial = (import ./r-spatial/flake.nix).outputs {inherit self; inherit nixpkgs;};
           py-spatial = (import ./py-spatial/flake.nix).outputs {inherit self; inherit nixpkgs;};
+          quarto = (import ./quarto/flake.nix).outputs {inherit self; inherit nixpkgs;};
         in {
           r-base = r-base.devShells.${system}.default;
           py-base = py-base.devShells.${system}.default;
           r-spatial = r-spatial.devShells.${system}.default;
           py-spatial = py-spatial.devShells.${system}.default;
+          quarto = quarto.devShells.${system}.default;
           };
 
         }) // {
@@ -40,6 +42,10 @@
           py-spatial = {
             path = ./py-spatial;
             description = "A Nix flake template for a py-spatial dev environment";
+          };
+          quarto = {
+            path = ./quarto;
+            description = "A Nix flake template for an dev environment containing quarto";
           };
         };
 
