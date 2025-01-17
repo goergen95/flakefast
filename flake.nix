@@ -16,12 +16,14 @@
           r-spatial = (import ./r-spatial/flake.nix).outputs {inherit self; inherit nixpkgs;};
           py-spatial = (import ./py-spatial/flake.nix).outputs {inherit self; inherit nixpkgs;};
           quarto = (import ./quarto/flake.nix).outputs {inherit self; inherit nixpkgs;};
+          positron = (import ./positron/flake.nix).outputs {inherit self; inherit nixpkgs;};
         in {
           r-base = r-base.devShells.${system}.default;
           py-base = py-base.devShells.${system}.default;
           r-spatial = r-spatial.devShells.${system}.default;
           py-spatial = py-spatial.devShells.${system}.default;
           quarto = quarto.devShells.${system}.default;
+          positron = positron.devShells.${system}.default;
           };
 
         }) // {
@@ -46,6 +48,10 @@
           quarto = {
             path = ./quarto;
             description = "A Nix flake template for an dev environment containing quarto";
+          };
+          positron = {
+            path = ./positron;
+            description = "A Nix flake template with the Positron IDE";
           };
         };
 
