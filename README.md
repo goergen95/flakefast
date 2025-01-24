@@ -35,7 +35,7 @@ nix flake show "github:goergen95/flakefast"
 To drop into a shell with a basic installation of R:
 
 ```bash
-nix develop "github:goergen95/flakefast#r-base"
+nix develop --unset PATH "github:goergen95/flakefast#r-base"
 ```
 
 You can also automatically enable a R spatial dev environment directly from 
@@ -60,6 +60,14 @@ nix flake init -t "github:goergen95/flakefast#py-spatial"
 echo "use flake" >> .envrc && direnv allow
 ```
 
+
+### Development
+
+To drop into a purely isolated environment run:
+
+```bash
+nix develop --unset PATH 
+```
 
 ### Code of conduct
 
