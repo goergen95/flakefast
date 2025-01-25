@@ -23,39 +23,32 @@
     in {
        devShells = forAllSystems ({ pkgs }:
          let
-            sysdeps = with pkgs;
-              [
-                coreutils
-                postgresql_17
-              ];
-
-            extensions = with pkgs.postgresql17Packages; [
-                postgis
-             ];
-
+            sysdeps = with pkgs; [coreutils];
+            postgis = pkgs.postgresql_17.withPackages (p: [ p.postgis ]);
           in {
 
           default = pkgs.mkShell {
             name = "postgis";
             buildInputs = [
-                sysdeps 
-                extensions
+                sysdeps
+                postgis
                 # https://github.com/toraritte/shell.nixes/blob/main/elixir-phoenix-postgres/shell.nix
                 # https://elixirforum.com/t/flake-nix-phoenix-postgresql/52622
                 (pkgs.writeShellScriptBin "pg-setup" ''
+                    set -e
                     mkdir -p $PGDATA
                     pg_ctl initdb -D $PGDATA
                 '')
-
                 (pkgs.writeShellScriptBin "pg-reset" ''
                     pg-stop
                     rm -rf $PGDATA
                 '')
-
                 (pkgs.writeShellScriptBin "pg-stop" ''
                     pg_ctl -D $PGDATA -U postgres stop
                 '')
-
+                (pkgs.writeShellScriptBin "pg-console" ''
+                    psql --host $PGDATA -U $USER postgres
+                '')
                 (pkgs.writeShellScriptBin "pg-start" ''
                     [ ! -d $PGDATA ] && pg-setup
                     pg_ctl                                                  \
@@ -63,20 +56,13 @@
                       -l $PGDATA/postgres.log                               \
                       -o "-c unix_socket_directories='$PGDATA'"             \
                       start
+                    psql -h $PGDATA -d postgres -c 'create extension if not exists postgis;'
                 '')
-
-                (pkgs.writeShellScriptBin "pg-console" ''
-                    psql --host $PGDATA -U $USER postgres
-                '')
-
             ];
-            inputsFrom = sysdeps;
             LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
             LANG = "en_US.UTF-8";
             shellHook = ''
                 export PGDATA=$PWD/.postgres
-                pg-start
-                trap "pg-stop" EXIT
             '';
             };
           });
