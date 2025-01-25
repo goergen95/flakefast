@@ -64,7 +64,6 @@
             shellHook = ''
                 export PGDATA=$PWD/.postgres
                 pg-start
-                trap "pg-stop" EXIT
             '';
             };
           });
