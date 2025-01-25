@@ -63,7 +63,6 @@
             LANG = "en_US.UTF-8";
             shellHook = ''
                 export PGDATA=$PWD/.postgres
-                pg-start
             '';
             };
           });
