@@ -26,22 +26,10 @@
             sysdeps = with pkgs;
               [
                 coreutils
+                python311
               ];
 
-            packages =  with pkgs; [
-              (python3.withPackages (ps: with ps;
-                [
-                ]))
-             # (python3Packages.buildPythonPackage {
-             #   pname = "name";
-             #   version = "0.0.0";
-             #   src = python3Packages.fetchPypi {
-             #     pname = "name";
-             #     version = "0.0.0";
-             #     sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-             #   };
-             # })
-            ];
+            packages = with pkgs.python311Packages; [ ];
 
           in {
 
