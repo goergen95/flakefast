@@ -27,6 +27,7 @@
               [
                 coreutils
                 quarto
+                jupyter
                 pandoc
               ];
 
