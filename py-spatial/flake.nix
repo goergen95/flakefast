@@ -34,11 +34,10 @@
                 gdal
                 openssl
                 proj
-                python311
               ];
 
-            packages = with pkgs.python311Packages;
-              [
+            packages = with pkgs; [
+              (python3.withPackages (ps: with ps; [
                 boto3
                 cartopy
                 dask
@@ -52,7 +51,17 @@
                 rasterio
                 xarray
                 zarr
-              ];
+              ]))
+            # (python3Packages.buildPythonPackage {
+            #   pname = "name";
+            #   version = "0.0.0";
+            #   src = python3Packages.fetchPypi {
+            #     pname = "name";
+            #     version = "0.0.0";
+            #     sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+            #   };
+            # })
+            ];
 
           in {
 
